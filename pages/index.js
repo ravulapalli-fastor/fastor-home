@@ -63,6 +63,31 @@ import ReviewMobile from "./reviewMobile";
 
 export default function Home(){
 
+  const isInViewport=(element)=> {
+    const rect = element.getBoundingClientRect();
+    var heightD = rect.bottom - rect.top;
+    return (
+      element.offsetTop < window.scrollY + 250 &&
+      element.offsetTop + heightD > window.scrollY + 250
+    );
+  }
+  
+  var lastScrollTop = 0;
+  const scrollDir=() =>{
+    var result = "";
+    var st = window.pageYOffset || document.documentElement.scrollTop;
+    if (st > lastScrollTop) {
+      result = "up";
+    } else {
+      result = "down";
+    }
+    lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
+    return result;
+  }
+  
+  
+  
+
   useEffect(()=>{
     (function (b, o, i, l, e, r) {
       b.GoogleAnalyticsObject = l;
@@ -193,30 +218,7 @@ window.addEventListener("scroll", function () {
     ele_build_mobile.classList.remove("fadeUp__animation","fadeDown__animation");
   }
 });
-},[])
-
-const isInViewport=(element)=> {
-  const rect = element.getBoundingClientRect();
-  var heightD = rect.bottom - rect.top;
-  return (
-    element.offsetTop < window.scrollY + 250 &&
-    element.offsetTop + heightD > window.scrollY + 250
-  );
-}
-
-var lastScrollTop = 0;
-const scrollDir=() =>{
-  var result = "";
-  var st = window.pageYOffset || document.documentElement.scrollTop;
-  if (st > lastScrollTop) {
-    result = "up";
-  } else {
-    result = "down";
-  }
-  lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-  return result;
-}
-
+},[scrollDir])
 
 
       // scroll left
@@ -736,10 +738,10 @@ const scrollDir=() =>{
               </div>
               <div className="steps__desktop_number">4</div>
               <div className="steps__desktop_card_right">
-                <h2>Deliver To Your Customer’s Doorstep</h2>
+                <h2>Deliver To Your Customer&apos;s Doorstep</h2>
                 <p>
                   No need to worry to get your product delivered ! You can
-                  easily deliver orders at customer's doorstep without any
+                  easily deliver orders at customer&apos;s doorstep without any
                   hassle. We have various Delivery partners who would pick
                   products from your location and deliver it to the customer.
                 </p>
@@ -852,10 +854,10 @@ const scrollDir=() =>{
             <div className="steps__mobile_card">
               <Image src={stepsManageImg4} alt="step4"/>
               <label for="step4">Step-4</label>
-              <h2>Deliver To Your Customer’s Doorstep</h2>
+              <h2>Deliver To Your Customer&apos;s Doorstep</h2>
               <p>
                 No need to worry to get your product delivered ! You can easily
-                deliver orders at customer's doorstep without any hassle. We
+                deliver orders at customer&apos;s doorstep without any hassle. We
                 have various Delivery partners who would pick products from your
                 location and deliver it to the customer.
               </p>
